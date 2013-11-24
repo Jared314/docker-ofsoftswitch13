@@ -8,7 +8,7 @@ deb-src http://us.archive.ubuntu.com/ubuntu/ precise-updates universe
 EOF
 
 apt-get update && apt-get -y upgrade
-apt-get -y install autoconf automake autotools-dev pkg-config make gcc g++ libtool libc6-dev cmake libpcap-dev libxerces-c2-dev unzip libpcre3-dev flex
+apt-get -y install autoconf automake autotools-dev pkg-config make gcc g++ libtool libc6-dev cmake libpcap-dev libxerces-c2-dev unzip libpcre3-dev flex bison libboost-dev
 
 # NetBee 
 cd /tmp
@@ -29,3 +29,5 @@ cd CPqD-ofsoftswitch13-cc167ab
 ./configure
 make
 make install
+
+#cleanup
