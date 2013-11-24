@@ -1,0 +1,31 @@
+#!/bin/bash
+
+cat << 'EOF' > /etc/apt/sources.list.d/universe.list
+deb http://us.archive.ubuntu.com/ubuntu/ precise universe
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise universe
+deb http://us.archive.ubuntu.com/ubuntu/ precise-updates universe
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise-updates universe
+EOF
+
+apt-get update && apt-get -y upgrade
+apt-get -y install autoconf automake autotools-dev pkg-config make gcc g++ libtool libc6-dev cmake libpcap-dev libxerces-c2-dev unzip libpcre3-dev flex
+
+# NetBee 
+cd /tmp
+unzip nbeesrc-jan-10-2013.zip
+cd nbeesrc-jan-10-2013/src
+cmake .
+make
+cd ..
+cp bin/libn*.so /usr/local/lib
+ldconfig
+cp -R include/ /usr/
+
+# ofsoftswitch
+cd /tmp
+unzip CPqD-ofsoftswitch13-cc167ab.zip
+cd CPqD-ofsoftswitch13-cc167ab
+./boot.sh
+./configure
+make
+make install
