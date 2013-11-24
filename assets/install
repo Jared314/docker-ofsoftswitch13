@@ -25,9 +25,20 @@ cp -R include/ /usr/
 cd /tmp
 unzip CPqD-ofsoftswitch13-cc167ab.zip
 cd CPqD-ofsoftswitch13-cc167ab
-./boot.sh
+
+# boot.sh (extracted to remove git repo dependency)
+(echo '# Automatically generated' &&
+ printf 'EXTRA_DIST += \\\n' &&
+ ls debian | grep -v '^debian/\.gitignore$' |
+ sed -e 's/\(.*\)/        \1 \\/' -e '$s/ \\//') > debian/automake.mk
+cat debian/control.in > debian/control
+autoreconf --install --force
+
 ./configure
 make
 make install
 
-#cleanup
+# cleanup
+cd /tmp
+rm /etc/apt/sources.list.d/universe.list
+rm -r /tmp/*
