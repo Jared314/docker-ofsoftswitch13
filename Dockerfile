@@ -4,6 +4,9 @@
 FROM ubuntu:precise
 MAINTAINER Jared Lobberecht <jared@lobberecht.com>
 
+ADD bin /usr/bin
 ADD assets /tmp
 
 RUN /tmp/install
+
+CMD run
