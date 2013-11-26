@@ -39,6 +39,6 @@ make
 make install
 
 # cleanup
-cd /tmp
+cd /
 rm /etc/apt/sources.list.d/universe.list
 rm -r /tmp/*
