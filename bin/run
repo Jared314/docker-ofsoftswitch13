@@ -1,2 +1,13 @@
 #!/bin/bash
 
+# wait for eth1
+pipework --wait
+
+# start switch daemon
+DPID="0123456789AB"
+NETINFS="eth1,eth2"
+ofdatapath --detach --pidfile=/var/run/ofdatapath.pid --force --datapath-id=$DPID --interfaces=$NETINFS punix:/var/run/dp0
+
+# connect switch to controller
+CIP=$1 #"192.168.0.100:6633"
+ofprotocol unix:/var/run/dp0 tcp:$CIP
